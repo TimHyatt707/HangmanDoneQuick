@@ -1,28 +1,43 @@
-import React, { Component } from 'react';
-import logo from './logo.svg';
+import React from 'react';
+import { BrowserRouter as Router, Route } from 'react-router-dom';
+import Loadable from 'react-loadable';
+import { Provider } from 'react-redux'
+import configureStore from './redux/store';
 import './App.css';
 
-class App extends Component {
-  render() {
-    return (
+const LoadableMainMenuScreen = Loadable({
+  loader: () => import('./screens/MainMenuScreen'),
+  loading: () => <div>Loading . . .</div>
+});
+
+const LoadableGameScreen = Loadable({
+  loader: () => import('./screens/GameScreen'),
+  loading: () => <div>Loading . . .</div>
+});
+
+const LoadableLeaderboardScreen = Loadable({
+  loader: () => import('./screens/LeaderboardScreen'),
+  loading: () => <div>Loading . . .</div>
+});
+
+const LoadableSettingsScreen = Loadable({
+  loader: () => import('./screens/SettingsScreen'),
+  loading: () => <div>Loading . . .</div>
+})
+
+const App = () => {
+  return (
+    <Provider store={configureStore()}>
       <div className="App">
-        <header className="App-header">
-          <img src={logo} className="App-logo" alt="logo" />
-          <p>
-            Edit <code>src/App.js</code> and save to reload.
-          </p>
-          <a
-            className="App-link"
-            href="https://reactjs.org"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Learn React
-          </a>
-        </header>
+        <Router>
+          <Route path="/" exact component={LoadableMainMenuScreen} />
+          <Route path="/play" component={LoadableGameScreen} />
+          <Route path="/leaderboard" component={LoadableLeaderboardScreen} />
+          <Route path="/settings" component={LoadableSettingsScreen} />
+        </Router>
       </div>
-    );
-  }
-}
+    </Provider>
+  );
+};
 
 export default App;
