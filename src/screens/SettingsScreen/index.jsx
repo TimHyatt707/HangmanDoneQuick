@@ -3,7 +3,7 @@ import './index.css';
 
 const SettingsScreen = () => {
   return (
-    <div className="App">
+    <div>
       <div>Settings Screen</div>
     </div>
   );

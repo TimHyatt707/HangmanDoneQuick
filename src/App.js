@@ -1,8 +1,10 @@
 import React from 'react';
 import { BrowserRouter as Router, Route } from 'react-router-dom';
 import Loadable from 'react-loadable';
+import { withTheme } from '@material-ui/core/styles';
 import { Provider } from 'react-redux'
 import configureStore from './redux/store';
+import theme from './theme';
 import './App.css';
 
 const LoadableMainMenuScreen = Loadable({
@@ -40,4 +42,4 @@ const App = () => {
   );
 };
 
-export default App;
+export default withTheme(theme)(App);

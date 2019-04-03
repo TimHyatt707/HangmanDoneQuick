@@ -3,7 +3,7 @@ import './index.css';
 
 const GameScreen = () => {
   return (
-    <div className="App">
+    <div className="game-screen-container">
       <div>Game Screen</div>
     </div>
   );

@@ -3,7 +3,7 @@ import './index.css';
 
 const LeaderboardScreen = () => {
   return (
-    <div className="App">
+    <div>
       <div>LeaderboardScreen</div>
     </div>
   );
