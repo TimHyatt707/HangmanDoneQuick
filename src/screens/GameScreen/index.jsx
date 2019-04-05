@@ -10,13 +10,23 @@ import {
 import Timer from '../../components/Timer';
 import IncorrectGuessesRow from '../../components/IncorrectGuessesRow';
 import GuessTextInput from '../../components/GuessTextInput';
+import Puzzle from '../../components/Puzzle';
 import './index.css';
 
 const GameScreen = props => {
-  const { currentScore, incorrectGuesses, end, status } = props;
+  const {
+    currentScore,
+    incorrectGuesses,
+    end,
+    status,
+    currentWord,
+    correctGuesses,
+    createGuess
+  } = props;
   const scoreText = `Score: ${currentScore}`;
   return (
     // primary game screen
+    // TODO: Create finished game screen
     <div>
       {(status === 'started' || status === 'inProgress') && (
         <div className="game-screen-container">
@@ -24,13 +34,13 @@ const GameScreen = props => {
             <Timer endGame={end} />
             <div className="gamescreen-row-item">{scoreText}</div>
           </div>
+          <Puzzle letters={currentWord} correctGuesses={correctGuesses} />
           <IncorrectGuessesRow incorrectGuesses={incorrectGuesses} />
-          <GuessTextInput />
+          <GuessTextInput sendGuess={createGuess} />
         </div>
       )}
       {status === 'finished' && <div>GAME OVER !</div>}
     </div>
-    // TODO: Create finished game screen
   );
 };
 
@@ -39,12 +49,14 @@ const mapStateToProps = state => ({
   incorrectGuesses: state.gameplay.incorrectGuesses,
   currentScore: state.gameplay.score,
   currentWord: state.gameplay.currentWord,
-  isLoadingData: state.gameplay.isLoadingData
+  isLoadingData: state.gameplay.isLoadingData,
+  correctGuesses: state.gameplay.correctGuesses,
+  guessedLetters: state.gameplay.guessedLetters
 });
 
 const mapDispatchToProps = dispatch => ({
   start: status => dispatch(startNewGame(status)),
-  guess: () => dispatch(createGuess()),
+  guess: letter => dispatch(createGuess(letter)),
   score: () => dispatch(updateScore()),
   newWord: () => dispatch(setNewWord()),
   end: status => dispatch(setGameplayStatus(status))
