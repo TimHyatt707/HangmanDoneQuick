@@ -2,3 +2,13 @@
     height: 100%;
     width: 100%;
 }
+
+.gamescreen-row {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+}
+
+.gamescreen-row-item {
+    padding: 20px;
+}

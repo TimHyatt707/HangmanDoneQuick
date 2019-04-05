@@ -1,8 +1,21 @@
-export default (state = {}, action) => {
+// Three enums for gameplay status: started, inProgress, finished, ready
+import * as types from '../actionTypes/gameplay';
+
+const initialState = {
+  status: 'started',
+  score: 100,
+  currentGuesses: [],
+  incorrectGuesses: [null, null, null, null, null, null],
+  currentWord: 'Foobar',
+  wordDatabase: [],
+  isLoadingData: false
+};
+
+export default (state = initialState, action) => {
   switch (action.type) {
-    case 'SIMPLE_ACTION':
+    case types.SET_GAME_FINISHED:
       return {
-        result: action.payload
+        status: action.payload
       };
     default:
       return state;
