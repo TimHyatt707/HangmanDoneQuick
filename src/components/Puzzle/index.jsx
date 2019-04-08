@@ -11,7 +11,7 @@ const Puzzle = props => {
       <div className="row">
         {letters.map(letter => {
           if (correctGuesses.indexOf(letter) === -1) {
-            return <Guess key={uuidv1()} letter="?" />;
+            return <Guess key={uuidv1()} letter="_" />;
           }
           return <Guess key={uuidv1()} letter={letter} />;
         })}
