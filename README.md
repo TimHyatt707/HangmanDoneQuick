@@ -12,7 +12,7 @@ REACH programming challenge - MVP
 
 ## How to start playing -- FOR NORMAL PEOPLE (or developers who value time)
 
-1. Simply visit elite-sheet.surge.sh 🤠
+1. Simply visit http://feeble-copy.surge.sh 🤠
 
 ## How to play
 1. Click 'Play Game'
