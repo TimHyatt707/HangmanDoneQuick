@@ -12,3 +12,12 @@
 .gamescreen-row-item {
     padding: 20px;
 }
+
+.loading {
+    display: flex;
+    height: 100%;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    font-size: 60px
+}

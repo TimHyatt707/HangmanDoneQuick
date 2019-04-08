@@ -10,18 +10,23 @@ const styles = () => ({
 });
 
 const PrimaryButton = props => {
-  const { classes, text, route } = props;
+  const { classes, text, route, override, onClick } = props;
   if (route) {
     return (
       <Link to={route} style={{ textDecoration: 'none' }}>
-        <Button variant="contained" color="primary" className={classes.buttonPadding}>
+        <Button
+          onClick={override ? onClick : () => {}}
+          variant="contained"
+          color="primary"
+          className={classes.buttonPadding}
+        >
           {text}
         </Button>
       </Link>
     );
   }
   return (
-    <Button variant="contained" color="primary" className={classes.buttonPadding}>
+    <Button onClick={onClick} variant="contained" color="primary" className={classes.buttonPadding}>
       {text}
     </Button>
   );

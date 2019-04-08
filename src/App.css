@@ -2,3 +2,17 @@
     height: 100%;
     width: 100%;
 }
+
+.row {
+    display: flex;
+    flex-direction: row;
+    
+}
+
+.small-padding {
+    padding: 10px
+}
+
+.medium-padding {
+    padding: 15px
+}

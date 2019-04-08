@@ -1,10 +1,10 @@
-.puzzle-guesses-column {
+.game-over-screen {
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
-} 
+}
 
-.puzzle-text-label {
-    padding: 15px
+.game-over-text {
+    padding: 10px;
 }

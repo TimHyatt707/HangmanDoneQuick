@@ -1,23 +1,68 @@
+import fetch from 'isomorphic-fetch';
 import * as types from '../../actionTypes/gameplay';
+import { API_URL } from '../../../consts';
 
 const startNewGame = () => dispatch => {};
 
-const createGuess = letter => dispatch => {
-  // TODO: Handle Guess logic
-  // Check if guess is already been tried
+const getWordsStart = () => ({
+  type: types.GET_WORDS_START
+});
 
-  // Send Correct Guess
+const getWordsSuccess = payload => ({
+  type: types.GET_WORDS_SUCCESS,
+  payload
+});
 
-  // Send incorrect guess
+const getWordsFailed = () => ({
+  type: types.GET_WORDS_FAILED
+});
+
+const getWords = () => async dispatch => {
+  try {
+    const options = {
+      method: 'get',
+      headers: {
+        'Access-Control-Allow-Origin': '*'
+      }
+    };
+    dispatch(getWordsStart());
+    const response = await fetch(`${API_URL}`, options);
+    if (response.status === 200) {
+      const payload = await response.text();
+      const dataArray = payload.split('\n');
+      dispatch(getWordsSuccess(dataArray));
+    } else {
+      throw new Error('Request failed');
+    }
+  } catch (error) {
+    dispatch(getWordsFailed());
+    console.log(error.message);
+  }
+};
+
+const createCorrectGuess = letter => dispatch => {
   dispatch({
-    type: types.SEND_GUESS,
+    type: types.SEND_CORRECT_GUESS,
+    payload: letter
+  });
+  dispatch({
+    type: types.UPDATE_SCORE,
+    payload: 10
+  });
+};
+
+const createIncorrectGuess = letter => dispatch => {
+  dispatch({
+    type: types.SEND_INCORRECT_GUESS,
     payload: letter
   });
 };
 
-const updateScore = () => dispatch => {};
-
-const setNewWord = () => dispatch => {};
+const setNewWord = word => dispatch =>
+  dispatch({
+    type: types.SET_NEW_WORD,
+    payload: word
+  });
 
 const setGameplayStatus = status => dispatch => {
   if (status === 'finished') {
@@ -28,6 +73,18 @@ const setGameplayStatus = status => dispatch => {
   }
 };
 
-const reset = () => dispatch => {};
+const reset = () => dispatch => {
+  dispatch({
+    type: types.RESET
+  });
+};
 
-export { startNewGame, createGuess, updateScore, setNewWord, reset, setGameplayStatus };
+export {
+  startNewGame,
+  createCorrectGuess,
+  createIncorrectGuess,
+  setNewWord,
+  reset,
+  setGameplayStatus,
+  getWords
+};
