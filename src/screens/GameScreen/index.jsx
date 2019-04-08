@@ -26,7 +26,7 @@ class GameScreen extends React.Component {
   }
 
   componentWillReceiveProps = nextProps => {
-    const { currentWord, setNewWordAction } = this.props;
+    const { currentWord } = this.props;
     if (!currentWord.length && nextProps.wordStore.length)  {
       this.getRandomWord(nextProps.wordStore);
     }
@@ -35,7 +35,7 @@ class GameScreen extends React.Component {
   componentDidUpdate = () => {
     const { setGameplayStatusAction, correctGuesses, incorrectGuesses, currentWord } = this.props;
     // Check for win condition
-    if (correctGuesses.join("") == currentWord.join("") && currentWord.length) {
+    if (correctGuesses.join("") === currentWord.join("") && currentWord.length) {
       setGameplayStatusAction(Status.FINISHED);
     }
 

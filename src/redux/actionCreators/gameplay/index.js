@@ -1,6 +1,6 @@
 import fetch from 'isomorphic-fetch';
 import * as types from '../../actionTypes/gameplay';
-import { API_URL } from '../../../consts';
+import { API_URL, CORS_BYPASS } from '../../../consts';
 
 const startNewGame = () => dispatch => {};
 
@@ -26,7 +26,7 @@ const getWords = () => async dispatch => {
       }
     };
     dispatch(getWordsStart());
-    const response = await fetch(`${API_URL}`, options);
+    const response = await fetch(`${CORS_BYPASS}${API_URL}`, options);
     if (response.status === 200) {
       const payload = await response.text();
       const dataArray = payload.split('\n');

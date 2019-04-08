@@ -14,7 +14,7 @@ class GameOver extends React.Component {
     const {
         currentWord,
         correctGuesses,
-        score
+        score,
     } = this.props;
     let resultStatement = '';
     if (currentWord.join('') === correctGuesses.join('')) {
@@ -23,10 +23,12 @@ class GameOver extends React.Component {
         resultStatement = 'You Lost!'
     }
     const scoreStatement = `Your score was ${score}`
+    const wordStatement = `Your word was ${currentWord.join('')}.`
     return (
       <div className="game-over-screen">
         <div className="game-over-text">Game Over!</div>
         <div className="game-over-text">{resultStatement}</div>
+        <div className="game-over-text">{wordStatement}</div>
         <div>{scoreStatement}</div>
         <PrimaryButton text="Play Again" onClick={this.onClickReset} />
         <PrimaryButton text="Back to Menu" override onClick={this.onClickReset} route="/" />
